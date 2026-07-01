@@ -64,9 +64,9 @@
   .tpt b{ color:#E6C878; }
   .tps{ color:#B89BD6; font-size:12px; margin-top:5px; }
   .tpc{ margin-top:12px; color:#E6C878; font-size:22px; font-weight:800; letter-spacing:2px; }
-  .tfan{ position:relative; width:280px; height:210px; margin-top:22px; }
-  .tcd{ position:absolute; left:50%; bottom:6px; width:60px; height:92px; border-radius:9px; background:linear-gradient(160deg,#3A2B57,#241A39); border:1.4px solid #6B5A8F; transform-origin:bottom center; display:grid; place-items:center; color:#C9A86A; font-size:16px; box-shadow:0 4px 12px rgba(0,0,0,.35); cursor:pointer; transition:transform .2s, box-shadow .2s, border-color .2s; }
-  .tcd.sel{ border-color:#E6C878; box-shadow:0 0 0 2px #E6C878, 0 10px 20px rgba(0,0,0,.5); z-index:20; }
+  .tfan{ position:relative; width:320px; max-width:96vw; height:180px; margin-top:22px; }
+  .tcd{ position:absolute; left:50%; bottom:6px; width:50px; height:78px; border-radius:9px; background:linear-gradient(160deg,#3A2B57,#241A39); border:1.4px solid #6B5A8F; transform-origin:center bottom; display:grid; place-items:center; color:#C9A86A; font-size:15px; box-shadow:0 4px 12px rgba(0,0,0,.35); cursor:pointer; transition:transform .22s cubic-bezier(.2,.8,.25,1), box-shadow .2s, border-color .2s; }
+  .tcd.sel{ border-color:#E6C878; box-shadow:0 0 0 2px #E6C878, 0 12px 24px rgba(0,0,0,.55); z-index:30; }
   .tpbtn{ margin-top:16px; background:#E6C878; color:#2a1c10; border:none; border-radius:14px; padding:13px 30px; font-size:16px; font-weight:800; font-family:'Pretendard',sans-serif; cursor:pointer; }
   .tpbtn:disabled{ background:#5B4C6E; color:#9a8ab0; cursor:not-allowed; }
   .composer{ flex:0 0 auto; padding:10px 12px calc(10px + env(safe-area-inset-bottom)); border-top:1px solid var(--line); display:flex; gap:9px; align-items:flex-end; background:#F7F7F7; }
@@ -183,15 +183,15 @@ const DECK=[
 let tarotDrawn=null, tarotFlips=0;
 function showTarotButton(){
   const wrap=document.createElement('div');wrap.className='tbtnwrap';
-  const btn=document.createElement('button');btn.className='tbtn';btn.textContent='🔮 카드 볼래?';
+  const btn=document.createElement('button');btn.className='tbtn';btn.textContent='🔮 타로 보기';
   btn.onclick=()=>{wrap.remove();openTarotPicker();};
   wrap.appendChild(btn);scrollEl.appendChild(wrap);scrollDown();
 }
 function openTarotPicker(){
   const idx=DECK.map((_,i)=>i);tarotDrawn=[];
   for(let i=0;i<3;i++){const j=Math.floor(Math.random()*idx.length);tarotDrawn.push(DECK[idx[j]]);idx.splice(j,1);}
-  const N=13, spread=36; let fan='';
-  for(let i=0;i<N;i++){const deg=(-spread+(2*spread/(N-1))*i).toFixed(1);fan+='<div class="tcd" data-b="translateX(-50%) rotate('+deg+'deg)" style="transform:translateX(-50%) rotate('+deg+'deg)">✦</div>';}
+  const N=11; let fan='';
+  for(let i=0;i<N;i++){const t=i-(N-1)/2;const x=Math.round(t*26);const r=(t*4).toFixed(1);const y=Math.round(Math.abs(t)*3);const base='translateX(calc(-50% + '+x+'px)) translateY('+y+'px) rotate('+r+'deg)';const lift='translateX(calc(-50% + '+x+'px)) translateY('+(y-32)+'px) rotate('+r+'deg)';fan+='<div class="tcd" data-b="'+base+'" data-l="'+lift+'" style="transform:'+base+'">✦</div>';}
   const over=document.createElement('div');over.className='tover';
   over.innerHTML='<div class="tpk"><div class="tpt">마음 가는 <b>카드 3장</b>을 골라봐</div><div class="tps">고민 떠올리면서 천천히</div><div class="tpc"><span id="tpcnt">0</span> / 3</div><div class="tfan">'+fan+'</div><button class="tpbtn" id="tpbtn" disabled>3장 골라줘</button></div>';
   document.querySelector('.device').appendChild(over);
@@ -200,8 +200,7 @@ function openTarotPicker(){
     cd.onclick=()=>{
       const p=selected.indexOf(cd);
       if(p>-1){selected.splice(p,1);cd.classList.remove('sel');cd.style.transform=cd.getAttribute('data-b');}
-      else{if(selected.length>=3)return;selected.push(cd);cd.classList.add('sel');cd.style.transform=cd.getAttribute('data-b')+' translateY(-24px)';}
-      const c=selected.length;over.querySelector('#tpcnt').textContent=c;
+            else{if(selected.length>=3)return;selected.push(cd);cd.classList.add('sel');cd.style.transform=cd.getAttribute('data-l');}
       const btn=over.querySelector('#tpbtn');btn.disabled=c<3;btn.textContent=c<3?(3-c)+'장 더 골라':'이 3장으로 볼게';
     };
   });

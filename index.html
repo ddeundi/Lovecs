@@ -9,9 +9,7 @@
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <style>
   @font-face{ font-family:'Kkukkukk'; src:url('kkukkukk.woff2') format('woff2'); font-display:swap; }
-  :root{
-    --bg:#F4F4F3; --surface:#FFFFFF; --line:#E7E7E7; --ink:#454545; --ink-dim:#9A9A9A; --border:#3B3B3B; --send:#5B5B5B; --kakao:#FAE100;
-  }
+  :root{ --bg:#F4F4F3; --surface:#FFFFFF; --line:#E7E7E7; --ink:#454545; --ink-dim:#9A9A9A; --border:#3B3B3B; --send:#5B5B5B; --kakao:#FAE100; }
   *{ box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
   html,body{ height:100%; }
   body{ background:#000; color:var(--ink); font-family:'Pretendard',-apple-system,sans-serif; overflow:hidden; }
@@ -29,6 +27,7 @@
   .scroll::-webkit-scrollbar{ width:0; }
   .dateline{ align-self:center; margin:4px 0 6px; }
   .dateline span{ font-size:11px; color:#8f8f8f; background:#E9E9E8; padding:4px 12px; border-radius:999px; }
+  .hint-line{ font-size:12px; color:#a5a5a5; margin:2px 2px 4px; padding-left:41px; }
   .row{ display:flex; gap:7px; max-width:100%; align-items:flex-end; animation:rise .3s ease both; }
   .row.me{ justify-content:flex-end; }
   .row .mini{ width:34px; height:34px; border-radius:12px; flex:0 0 auto; background:#EEE url('kitty.png') center/88% no-repeat; }
@@ -43,6 +42,21 @@
   .chips{ display:flex; flex-wrap:wrap; gap:7px; padding:2px 0 2px 41px; }
   .chip{ border:1.4px solid var(--border); background:#fff; color:#555; font-size:15px; padding:8px 14px; border-radius:999px; cursor:pointer; font-family:'Kkukkukk','Pretendard',sans-serif; }
   .chip:active{ background:#f2f2f2; }
+  .tbtnwrap{ padding-left:41px; }
+  .tbtn{ background:linear-gradient(145deg,#7C5CA8,#5B4184); color:#fff; border:1px solid #9A79BE; border-radius:15px; padding:10px 18px; font-size:16px; cursor:pointer; font-family:'Kkukkukk','Pretendard',sans-serif; }
+  .tbtn:active{ transform:scale(.96); }
+  .tdraw{ display:flex; gap:9px; justify-content:center; padding:6px 0 2px; }
+  .tcol{ text-align:center; }
+  .tpos{ font-size:11px; color:#8A6FB8; margin-bottom:5px; font-weight:700; font-family:'Pretendard',sans-serif; }
+  .tcw{ width:72px; height:112px; perspective:650px; cursor:pointer; }
+  .tci{ position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .75s cubic-bezier(.2,.85,.25,1); }
+  .tci.flipped{ transform:rotateY(180deg); }
+  .tbk,.tfc{ position:absolute; inset:0; -webkit-backface-visibility:hidden; backface-visibility:hidden; border-radius:10px; overflow:hidden; }
+  .tbk{ background:linear-gradient(160deg,#3A2B57,#241A39); border:1.5px solid #6B5A8F; display:grid; place-items:center; color:#C9A86A; font-size:19px; }
+  .tfc{ transform:rotateY(180deg); background:linear-gradient(165deg,#2C2247,#150E26); border:1.5px solid #C9A86A; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .troman{ font-size:8px; color:#D8B878; letter-spacing:1.5px; }
+  .tkr{ font-size:13px; font-weight:800; color:#F1E6C8; margin-top:3px; font-family:'Pretendard',sans-serif; }
+  .ten{ font-size:6.5px; color:#C9A86A; letter-spacing:1px; margin-top:1px; }
   .composer{ flex:0 0 auto; padding:10px 12px calc(10px + env(safe-area-inset-bottom)); border-top:1px solid var(--line); display:flex; gap:9px; align-items:flex-end; background:#F7F7F7; }
   .composer textarea{ flex:1; resize:none; border:1px solid var(--line); background:#fff; color:#333; border-radius:18px; padding:10px 14px; font-family:inherit; font-size:15px; line-height:1.4; max-height:120px; outline:none; }
   .composer textarea::placeholder{ color:#b3b3b3; }
@@ -109,10 +123,7 @@
       </div>
       <header class="header">
         <div class="avatar"></div>
-        <div>
-          <div class="name">언니</div>
-          <div class="status"><i class="dot"></i> 보통 바로 답함</div>
-        </div>
+        <div><div class="name">언니</div><div class="status"><i class="dot"></i> 보통 바로 답함</div></div>
       </header>
       <div class="adslot">
         <a href="https://link.coupang.com/a/e1qYqnU6H6" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
@@ -134,13 +145,80 @@ function two(n){return n<10?'0'+n:''+n;}
 function updateLock(){const d=new Date();let h=d.getHours();const m=d.getMinutes();let h12=h%12;if(h12===0)h12=12;document.getElementById('lockTime').textContent=h12+':'+two(m);document.getElementById('lockDate').textContent=(d.getMonth()+1)+'월 '+d.getDate()+'일 ('+WD[d.getDay()]+')';}
 function timeLabel(){const d=new Date();let h=d.getHours();const m=d.getMinutes();const ap=h<12?'오전':'오후';let h12=h%12;if(h12===0)h12=12;return ap+' '+h12+':'+two(m);}
 updateLock();setInterval(updateLock,15000);
-function addMessage(text,who){const row=document.createElement('div');row.className='row '+(who==='me'?'me':'bot');if(who==='bot'){const mini=document.createElement('div');mini.className='mini';row.appendChild(mini);}const b=document.createElement('div');b.className='bubble';b.textContent=text;row.appendChild(b);scrollEl.appendChild(row);scrollEl.scrollTop=scrollEl.scrollHeight;return row;}
-function showTyping(){const row=document.createElement('div');row.className='row bot typing';row.innerHTML='<div class="mini"></div><div class="bubble"><span></span><span></span><span></span></div>';scrollEl.appendChild(row);scrollEl.scrollTop=scrollEl.scrollHeight;return row;}
+function scrollDown(){scrollEl.scrollTop=scrollEl.scrollHeight;}
+function addMessage(text,who){const row=document.createElement('div');row.className='row '+(who==='me'?'me':'bot');if(who==='bot'){const mini=document.createElement('div');mini.className='mini';row.appendChild(mini);}const b=document.createElement('div');b.className='bubble';b.textContent=text;row.appendChild(b);scrollEl.appendChild(row);scrollDown();return row;}
+function showTyping(){const row=document.createElement('div');row.className='row bot typing';row.innerHTML='<div class="mini"></div><div class="bubble"><span></span><span></span><span></span></div>';scrollEl.appendChild(row);scrollDown();return row;}
 let entryEl=null;
-function showEntry(){const dl=document.createElement('div');dl.className='dateline';dl.innerHTML='<span>'+timeLabel()+'</span>';scrollEl.appendChild(dl);entryEl=document.createElement('div');const hint=document.createElement('div');hint.className='hint-line';hint.textContent='고민 하나 골라서 보내거나, 직접 써도 돼.';const chips=document.createElement('div');chips.className='chips';['읽씹 당했어','자꾸 연락하게 돼','이 사람 날 좋아하나?','헤어질까 말까'].forEach(t=>{const c=document.createElement('button');c.className='chip';c.textContent=t;c.onclick=()=>{inputEl.value=t;send();};chips.appendChild(c);});entryEl.appendChild(hint);entryEl.appendChild(chips);scrollEl.appendChild(entryEl);}
+function showEntry(){
+  const dl=document.createElement('div');dl.className='dateline';dl.innerHTML='<span>'+timeLabel()+'</span>';scrollEl.appendChild(dl);
+  addMessage('전화했었네? 무슨 일 있어?','bot');
+  entryEl=document.createElement('div');
+  const hint=document.createElement('div');hint.className='hint-line';hint.textContent='고민 하나 골라서 보내거나, 직접 써도 돼.';
+  const chips=document.createElement('div');chips.className='chips';
+  ['읽씹 당했어','자꾸 연락하게 돼','이 사람 날 좋아하나?','헤어질까 말까'].forEach(t=>{const c=document.createElement('button');c.className='chip';c.textContent=t;c.onclick=()=>{inputEl.value=t;send();};chips.appendChild(c);});
+  entryEl.appendChild(hint);entryEl.appendChild(chips);scrollEl.appendChild(entryEl);scrollDown();
+}
+const DECK=[
+  {kr:'달',en:'THE MOON',roman:'XVIII',sym:`<circle cx="30" cy="27" r="15" fill="#E6C878"/><circle cx="38" cy="22" r="13" fill="#150E26"/>`},
+  {kr:'별',en:'THE STAR',roman:'XVII',sym:`<path d="M30,11 L34,25 L48,29 L34,33 L30,47 L26,33 L12,29 L26,25 Z" fill="#E6C878"/>`},
+  {kr:'태양',en:'THE SUN',roman:'XIX',sym:`<g stroke="#E0BE72" stroke-width="2" stroke-linecap="round"><line x1="30" y1="7" x2="30" y2="13"/><line x1="30" y1="45" x2="30" y2="51"/><line x1="7" y1="29" x2="13" y2="29"/><line x1="45" y1="29" x2="51" y2="29"/><line x1="13" y1="12" x2="17" y2="16"/><line x1="47" y1="12" x2="43" y2="16"/><line x1="13" y1="46" x2="17" y2="42"/><line x1="47" y1="46" x2="43" y2="42"/></g><circle cx="30" cy="29" r="12" fill="#E6C878"/>`},
+  {kr:'연인',en:'THE LOVERS',roman:'VI',sym:`<circle cx="24" cy="29" r="10" fill="none" stroke="#E6C878" stroke-width="3"/><circle cx="36" cy="29" r="10" fill="none" stroke="#E6C878" stroke-width="3"/>`},
+  {kr:'탑',en:'THE TOWER',roman:'XVI',sym:`<rect x="23" y="22" width="14" height="24" fill="none" stroke="#E6C878" stroke-width="2"/><path d="M30,9 L25,22 L35,22 Z" fill="#E6C878"/><path d="M31,25 l-4,8 l5,0 l-4,8" fill="none" stroke="#FFD54F" stroke-width="2"/>`},
+  {kr:'운명의 수레바퀴',en:'WHEEL',roman:'X',sym:`<circle cx="30" cy="29" r="15" fill="none" stroke="#E6C878" stroke-width="2.5"/><line x1="30" y1="14" x2="30" y2="44" stroke="#E6C878" stroke-width="2"/><line x1="15" y1="29" x2="45" y2="29" stroke="#E6C878" stroke-width="2"/><line x1="19" y1="18" x2="41" y2="40" stroke="#E6C878" stroke-width="1.5"/><line x1="41" y1="18" x2="19" y2="40" stroke="#E6C878" stroke-width="1.5"/>`},
+  {kr:'여황제',en:'THE EMPRESS',roman:'III',sym:`<path d="M15,42 L19,22 L30,32 L41,22 L45,42 Z" fill="#E6C878"/><rect x="15" y="42" width="30" height="5" fill="#E6C878"/>`},
+  {kr:'힘',en:'STRENGTH',roman:'VIII',sym:`<path d="M20,29 a6.5,6.5 0 1 1 10,0 a6.5,6.5 0 1 0 10,0 a6.5,6.5 0 1 1 -10,0 a6.5,6.5 0 1 0 -10,0 Z" fill="none" stroke="#E6C878" stroke-width="2.5"/>`}
+];
+let tarotDrawn=null, tarotFlips=0;
+function showTarotButton(){
+  const wrap=document.createElement('div');wrap.className='tbtnwrap';
+  const btn=document.createElement('button');btn.className='tbtn';btn.textContent='🔮 카드 볼래?';
+  btn.onclick=()=>{wrap.remove();startTarot();};
+  wrap.appendChild(btn);scrollEl.appendChild(wrap);scrollDown();
+}
+function startTarot(){
+  const idx=DECK.map((_,i)=>i);tarotDrawn=[];tarotFlips=0;
+  for(let i=0;i<3;i++){const j=Math.floor(Math.random()*idx.length);tarotDrawn.push(DECK[idx[j]]);idx.splice(j,1);}
+  addMessage('마음 가는 카드부터 하나씩 눌러봐.','bot');
+  const POS=['과거','현재','미래'];
+  const draw=document.createElement('div');draw.className='tdraw';
+  tarotDrawn.forEach((c,i)=>{
+    const col=document.createElement('div');col.className='tcol';
+    col.innerHTML='<div class="tpos">'+POS[i]+'</div><div class="tcw"><div class="tci"><div class="tbk">✦</div><div class="tfc"><div class="troman">'+c.roman+'</div><svg width="52" height="52" viewBox="0 0 60 60">'+c.sym+'</svg><div class="tkr">'+c.kr+'</div><div class="ten">'+c.en+'</div></div></div></div>';
+    col.querySelector('.tcw').onclick=function(){flipCard(this);};
+    draw.appendChild(col);
+  });
+  scrollEl.appendChild(draw);scrollDown();
+}
+function flipCard(w){const inner=w.querySelector('.tci');if(inner.classList.contains('flipped'))return;inner.classList.add('flipped');tarotFlips++;if(tarotFlips===3)setTimeout(finishTarot,850);}
+function finishTarot(){
+  if(busy)return;
+  const POS=['과거','현재','미래'];
+  const names=tarotDrawn.map((c,i)=>POS[i]+' '+c.kr+'('+c.en+')').join(', ');
+  history.push({role:'user',content:'방금 타로 카드 3장 뽑았어. '+names+' 나왔어. 이 카드들로 지금 내 상황 봐줘.'});
+  busy=true;sendEl.disabled=true;
+  const typing=showTyping();
+  askClaude().then(reply=>{typing.remove();const clean=reply.replace(/\[\[타로\]\]/g,'').trim();addMessage(clean,'bot');history.push({role:'assistant',content:clean});})
+    .catch(err=>{typing.remove();addMessage('어 잠깐, 카드 해석이 지금 안 되네. 좀 있다 다시.','bot');console.error(err);})
+    .finally(()=>{busy=false;sendEl.disabled=inputEl.value.trim()==='';});
+}
 async function askClaude(){const res=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:history})});if(!res.ok)throw new Error("status "+res.status);const data=await res.json();return data.content.map(c=>c.type==="text"?c.text:"").join("").trim();}
 let busy=false;
-async function send(){const text=inputEl.value.trim();if(!text||busy)return;if(entryEl){entryEl.remove();entryEl=null;}busy=true;sendEl.disabled=true;addMessage(text,'me');history.push({role:"user",content:text});inputEl.value='';autoGrow();const typing=showTyping();try{const reply=await askClaude();typing.remove();addMessage(reply,'bot');history.push({role:"assistant",content:reply});}catch(err){typing.remove();addMessage("어 잠깐만.. 나 지금 연결이 안 되네. 좀 있다 다시 말 걸어봐.",'bot');console.error(err);}finally{busy=false;sendEl.disabled=inputEl.value.trim()==='';}}
+async function send(){
+  const text=inputEl.value.trim();if(!text||busy)return;
+  if(entryEl){entryEl.remove();entryEl=null;}
+  busy=true;sendEl.disabled=true;
+  addMessage(text,'me');history.push({role:"user",content:text});
+  inputEl.value='';autoGrow();
+  const typing=showTyping();
+  try{
+    const reply=await askClaude();typing.remove();
+    let clean=reply,offer=false;
+    if(clean.indexOf('[[타로]]')!==-1){offer=true;clean=clean.replace(/\[\[타로\]\]/g,'').trim();}
+    addMessage(clean,'bot');history.push({role:"assistant",content:clean});
+    if(offer)showTarotButton();
+  }catch(err){typing.remove();addMessage("어 잠깐만.. 나 지금 연결이 안 되네. 좀 있다 다시 말 걸어봐.",'bot');console.error(err);}
+  finally{busy=false;sendEl.disabled=inputEl.value.trim()==='';}
+}
 function autoGrow(){inputEl.style.height='auto';inputEl.style.height=Math.min(inputEl.scrollHeight,120)+'px';sendEl.disabled=inputEl.value.trim()===''||busy;}
 inputEl.addEventListener('input',autoGrow);
 inputEl.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}});

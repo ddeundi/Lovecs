@@ -189,9 +189,7 @@ function showTarotButton(){
 }
 function openTarotPicker(){
   const idx=DECK.map((_,i)=>i);tarotDrawn=[];
-  for(let i=0;i<3;i++){const j=Math.floor(Math.random()*idx.length);tarotDrawn.push(DECK[idx[j]]);idx.splice(j,1);}
-  const N=11; let fan='';
-  for(let i=0;i<N;i++){const t=i-(N-1)/2;const x=Math.round(t*26);const r=(t*4).toFixed(1);const y=Math.round(Math.abs(t)*3);const base='translateX(calc(-50% + '+x+'px)) translateY('+y+'px) rotate('+r+'deg)';const lift='translateX(calc(-50% + '+x+'px)) translateY('+(y-32)+'px) rotate('+r+'deg)';fan+='<div class="tcd" data-b="'+base+'" data-l="'+lift+'" style="transform:'+base+'">✦</div>';}
+    for(let i=0;i<N;i++){const t=i-(N-1)/2;const x=Math.round(t*26);const r=(t*4).toFixed(1);const y=Math.round(Math.abs(t)*3);const base='translate(-50%,0) translate('+x+'px,'+y+'px) rotate('+r+'deg)';const lift='translate(-50%,0) translate('+x+'px,'+(y-32)+'px) rotate('+r+'deg)';fan+='<div class="tcd" data-b="'+base+'" data-l="'+lift+'" style="transform:'+base+'">✦</div>';}
   const over=document.createElement('div');over.className='tover';
   over.innerHTML='<div class="tpk"><div class="tpt">마음 가는 <b>카드 3장</b>을 골라봐</div><div class="tps">고민 떠올리면서 천천히</div><div class="tpc"><span id="tpcnt">0</span> / 3</div><div class="tfan">'+fan+'</div><button class="tpbtn" id="tpbtn" disabled>3장 골라줘</button></div>';
   document.querySelector('.device').appendChild(over);

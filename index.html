@@ -3,386 +3,217 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>새벽 2시 팩폭 상담소</title>
+<title>새벽 2시 · ESTJ 언니</title>
 
-<!-- 폰트: Black Han Sans(강한 제목용) + Pretendard(본문용) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 
-<!-- ▼▼▼ 쿠팡 파트너스 로더 ▼▼▼ -->
+<!-- 쿠팡 파트너스 로더 -->
 <script src="https://ads-partners.coupang.com/g.js"></script>
-<!-- ▲▲▲ 쿠팡 파트너스 로더 ▲▲▲ -->
 
 <style>
   :root{
-    --bg:#0F1014;
-    --surface:#1A1C24;
-    --surface-2:#232633;
-    --line:#2C2F3D;
-    --ink:#F2EDE4;        /* 따뜻한 오프화이트 */
-    --ink-dim:#8E8FA0;
-    --punch:#FF5252;      /* 팩폭의 '폭' (코랄레드) */
-    --punch-soft:#FF7B7B;
-    --warm:#FFC15E;       /* 다정함의 '온도' (앰버) */
-    --user:#FFB27A;       /* 내 말풍선 톤 */
+    --bg:#1C1726; --surface:#271F33; --surface-2:#2E2540; --line:#342B45;
+    --ink:#ECE6F4; --ink-dim:#9385A3; --punch:#9A79BE; --gold:#D8B878; --user:#9A79BE;
   }
-
   *{ box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
-
   html,body{ height:100%; }
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Pretendard',-apple-system,sans-serif;
-    display:flex; justify-content:center;
-    overflow:hidden;
-  }
-
-  /* 폰처럼 가운데 정렬된 앱 컨테이너 */
-  .app{
-    width:100%; max-width:480px; height:100dvh;
-    display:flex; flex-direction:column;
-    position:relative;
-    background:
-      radial-gradient(120% 60% at 50% -10%, rgba(255,82,82,.10), transparent 60%),
-      var(--bg);
-  }
-
-  /* ───────── 헤더 ───────── */
-  .header{
-    flex:0 0 auto;
-    padding:16px 18px 14px;
-    border-bottom:1px solid var(--line);
-    display:flex; align-items:center; gap:12px;
-    background:rgba(15,16,20,.7);
-    backdrop-filter:blur(10px);
-    z-index:5;
-  }
-  .avatar{
-    width:42px; height:42px; border-radius:13px; flex:0 0 auto;
-    background:linear-gradient(145deg,var(--punch),#C62828);
-    display:grid; place-items:center;
-    font-family:'Black Han Sans'; font-size:20px; color:#fff;
-    box-shadow:0 4px 14px rgba(255,82,82,.35);
-  }
+  body{ background:var(--bg); color:var(--ink); font-family:'Pretendard',-apple-system,sans-serif; overflow:hidden; }
+  .stage{ min-height:100dvh; display:flex; align-items:center; justify-content:center; background:var(--bg); }
+  .device{ position:relative; width:100%; max-width:480px; height:100dvh; background:var(--bg); overflow:hidden; }
+  .app{ width:100%; height:100%; display:flex; flex-direction:column; position:relative; }
+  .header{ flex:0 0 auto; padding:14px 16px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:11px; background:var(--bg); z-index:5; }
+  .avatar{ width:40px; height:40px; border-radius:14px; flex:0 0 auto; background-color:#8A6FB8; background-image:url('unni.jpg'); background-size:cover; background-position:center 30%; }
   .header .meta{ display:flex; flex-direction:column; line-height:1.25; }
   .header .name{ font-weight:700; font-size:16px; letter-spacing:-.02em; }
   .header .status{ font-size:12px; color:var(--ink-dim); display:flex; align-items:center; gap:5px; }
   .dot{ width:6px; height:6px; border-radius:50%; background:#3DDC84; box-shadow:0 0 8px #3DDC84; }
-
-  /* ───────── 광고 배너 ───────── */
-  .adslot{
-    flex:0 0 auto;
-    display:flex; flex-direction:column; justify-content:center; align-items:center;
-    padding:6px 0; overflow:hidden;
-    background:var(--surface); border-bottom:1px solid var(--line);
-  }
-  /* 광고 코드가 아직 없을 때 보이는 안내(빈 자리) — 승인 후 자동으로 광고가 덮어씀 */
-  .adslot .ad-placeholder{
-    font-size:11px; color:var(--ink-dim); opacity:.5; letter-spacing:.02em;
-    min-height:50px; display:flex; align-items:center;
-  }
-  /* 쿠팡 파트너스 필수 고지문구 */
-  .ad-disclaimer{
-    font-size:10px; color:var(--ink-dim); opacity:.6;
-    text-align:center; line-height:1.4; padding:0 14px; margin-top:5px;
-  }
-
-  /* ───────── 메시지 영역 ───────── */
-  .scroll{
-    flex:1 1 auto; overflow-y:auto;
-    padding:20px 16px 12px;
-    display:flex; flex-direction:column; gap:14px;
-    scroll-behavior:smooth;
-  }
+  .adslot{ flex:0 0 auto; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:6px 0; overflow:hidden; background:var(--surface); border-bottom:1px solid var(--line); }
+  .adslot .ad-placeholder{ font-size:11px; color:var(--ink-dim); opacity:.5; min-height:50px; display:flex; align-items:center; }
+  .ad-disclaimer{ font-size:10px; color:var(--ink-dim); opacity:.6; text-align:center; line-height:1.4; padding:0 14px; margin-top:5px; }
+  .scroll{ flex:1 1 auto; overflow-y:auto; padding:18px 16px 12px; display:flex; flex-direction:column; gap:13px; scroll-behavior:smooth; }
   .scroll::-webkit-scrollbar{ width:0; }
-
+  .dateline{ align-self:center; margin:4px 0 8px; }
+  .dateline span{ font-size:11px; color:var(--ink-dim); background:var(--surface); padding:4px 12px; border-radius:999px; }
+  .hint-line{ font-size:12px; color:#7A6E8A; margin:2px 2px 6px; }
   .row{ display:flex; gap:9px; max-width:100%; animation:rise .35s cubic-bezier(.2,.8,.2,1) both; }
   .row.me{ justify-content:flex-end; }
-  .row .mini{
-    width:30px; height:30px; border-radius:9px; flex:0 0 auto;
-    background:linear-gradient(145deg,var(--punch),#C62828);
-    display:grid; place-items:center;
-    font-family:'Black Han Sans'; font-size:14px; color:#fff; margin-top:2px;
-  }
-
-  .bubble{
-    padding:12px 15px; border-radius:18px; font-size:15px; line-height:1.6;
-    max-width:80%; word-break:break-word; letter-spacing:-.01em;
-    white-space:pre-wrap;
-  }
-  /* 봇: 어두운 표면 + 왼쪽 코랄 강조선 */
-  .bot .bubble{
-    background:var(--surface-2);
-    border:1px solid var(--line);
-    border-left:3px solid var(--punch);
-    border-top-left-radius:6px;
-  }
-  /* 나: 따뜻한 그라데이션 */
-  .me .bubble{
-    background:linear-gradient(135deg,#FFC15E,#FF9D5C);
-    color:#2A1A0E; font-weight:500;
-    border-top-right-radius:6px;
-  }
-
-  /* 봇 답변이 '꽂힐' 때 살짝 임팩트 */
+  .row .mini{ width:36px; height:36px; border-radius:13px; flex:0 0 auto; margin-top:2px; background-color:#8A6FB8; background-image:url('unni.jpg'); background-size:cover; background-position:center 30%; }
+  .bubble{ padding:9px 12px; border-radius:16px; font-size:15px; line-height:1.5; max-width:78%; word-break:break-word; letter-spacing:-.01em; white-space:pre-wrap; }
+  .bot .bubble{ background:var(--surface-2); color:var(--ink); border-top-left-radius:4px; }
+  .me .bubble{ background:var(--user); color:#FFFFFF; font-weight:400; border-top-right-radius:4px; }
   .bot.hit .bubble{ animation:hit .5s cubic-bezier(.36,.07,.19,.97) both; }
-
   @keyframes rise{ from{ opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;} }
-  @keyframes hit{
-    0%{ transform:translateX(0);}
-    20%{ transform:translateX(-4px);}
-    40%{ transform:translateX(4px);}
-    60%{ transform:translateX(-2px);}
-    80%{ transform:translateX(2px);}
-    100%{ transform:translateX(0);}
-  }
-
-  /* 타이핑 인디케이터 */
+  @keyframes hit{ 0%{transform:translateX(0);} 20%{transform:translateX(-4px);} 40%{transform:translateX(4px);} 60%{transform:translateX(-2px);} 80%{transform:translateX(2px);} 100%{transform:translateX(0);} }
   .typing .bubble{ display:flex; gap:5px; align-items:center; padding:15px; }
   .typing span{ width:7px; height:7px; border-radius:50%; background:var(--ink-dim); animation:blink 1.2s infinite; }
-  .typing span:nth-child(2){ animation-delay:.2s; }
-  .typing span:nth-child(3){ animation-delay:.4s; }
+  .typing span:nth-child(2){ animation-delay:.2s; } .typing span:nth-child(3){ animation-delay:.4s; }
   @keyframes blink{ 0%,60%,100%{opacity:.25; transform:translateY(0);} 30%{opacity:1; transform:translateY(-3px);} }
-
-  /* 시작 추천 칩 */
-  .chips{ display:flex; flex-wrap:wrap; gap:8px; padding:4px 2px 2px; }
-  .chip{
-    border:1px solid var(--line); background:var(--surface);
-    color:var(--ink-dim); font-size:13px; padding:9px 13px; border-radius:999px;
-    cursor:pointer; transition:.15s; font-family:inherit;
-  }
-  .chip:hover,.chip:active{ color:var(--ink); border-color:var(--punch); background:#211c20; }
-
-  /* ───────── 입력창 ───────── */
-  .composer{
-    flex:0 0 auto;
-    padding:12px 14px calc(12px + env(safe-area-inset-bottom));
-    border-top:1px solid var(--line);
-    display:flex; gap:10px; align-items:flex-end;
-    background:rgba(15,16,20,.85); backdrop-filter:blur(10px);
-  }
-  .composer textarea{
-    flex:1; resize:none; border:1px solid var(--line);
-    background:var(--surface); color:var(--ink);
-    border-radius:16px; padding:12px 14px; font-family:inherit;
-    font-size:15px; line-height:1.4; max-height:120px; outline:none;
-    transition:border-color .15s;
-  }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; padding:2px 0; }
+  .chip{ border:1px solid var(--line); background:var(--surface); color:#C4B6D6; font-size:13px; padding:9px 13px; border-radius:999px; cursor:pointer; transition:.15s; font-family:inherit; }
+  .chip:hover,.chip:active{ color:var(--ink); border-color:var(--punch); background:#2f2740; }
+  .composer{ flex:0 0 auto; padding:12px 14px calc(12px + env(safe-area-inset-bottom)); border-top:1px solid var(--line); display:flex; gap:10px; align-items:flex-end; background:var(--bg); }
+  .composer textarea{ flex:1; resize:none; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:16px; padding:12px 14px; font-family:inherit; font-size:15px; line-height:1.4; max-height:120px; outline:none; transition:border-color .15s; }
   .composer textarea:focus{ border-color:var(--punch); }
   .composer textarea::placeholder{ color:var(--ink-dim); }
-  .send{
-    width:46px; height:46px; flex:0 0 auto; border:none; border-radius:14px;
-    background:linear-gradient(145deg,var(--punch),#C62828); color:#fff;
-    font-size:20px; cursor:pointer; display:grid; place-items:center;
-    transition:transform .12s, opacity .15s;
-  }
+  .send{ width:44px; height:44px; flex:0 0 auto; border:none; border-radius:50%; background:var(--punch); color:#FFFFFF; font-size:18px; cursor:pointer; display:grid; place-items:center; transition:transform .12s, opacity .15s; }
   .send:active{ transform:scale(.92); }
   .send:disabled{ opacity:.4; cursor:not-allowed; }
-
-  /* ───────── 인트로 오버레이 ───────── */
-  .intro{
-    position:absolute; inset:0; z-index:20;
-    background:
-      radial-gradient(100% 70% at 50% 0%, rgba(255,82,82,.18), transparent 55%),
-      var(--bg);
-    display:flex; flex-direction:column; justify-content:center;
-    padding:32px 28px; gap:18px;
-    transition:opacity .4s, transform .4s;
-  }
+  .intro{ position:absolute; inset:0; z-index:20; background:var(--bg); display:flex; flex-direction:column; justify-content:center; padding:34px 30px; gap:6px; transition:opacity .4s, transform .4s; }
   .intro.hide{ opacity:0; transform:scale(1.04); pointer-events:none; }
-  .intro .tag{ color:var(--punch); font-weight:700; font-size:14px; letter-spacing:.04em; }
-  .intro h1{
-    font-family:'Black Han Sans'; font-weight:400;
-    font-size:clamp(40px,12vw,58px); line-height:1.02; letter-spacing:-.01em;
-  }
-  .intro h1 .br{ color:var(--punch); }
-  .intro p{ color:var(--ink-dim); font-size:15px; line-height:1.65; max-width:30ch; }
-  .intro .warn{ font-size:12.5px; color:var(--ink-dim); opacity:.75; line-height:1.5; }
-  .start{
-    margin-top:6px; align-self:flex-start;
-    font-family:'Black Han Sans'; font-size:19px; color:#fff;
-    background:linear-gradient(145deg,var(--punch),#C62828);
-    border:none; border-radius:16px; padding:15px 30px; cursor:pointer;
-    box-shadow:0 8px 24px rgba(255,82,82,.35); transition:transform .12s;
-  }
+  .clock{ font-family:'Black Han Sans',sans-serif; font-size:clamp(60px,20vw,84px); line-height:1; color:var(--ink); letter-spacing:1px; }
+  .clock .ap{ font-size:.3em; color:#A98BD0; margin-left:10px; letter-spacing:1px; }
+  .intro .ttl{ font-family:'Black Han Sans',sans-serif; font-weight:400; font-size:clamp(27px,7.5vw,33px); line-height:1.15; color:var(--ink); margin-top:16px; }
+  .intro p.desc{ color:var(--ink-dim); font-size:15px; line-height:1.65; margin-top:12px; }
+  .start{ margin-top:22px; align-self:flex-start; font-family:'Black Han Sans',sans-serif; font-size:19px; color:#FFFFFF; background:var(--punch); border:none; border-radius:15px; padding:15px 30px; cursor:pointer; transition:transform .12s; }
   .start:active{ transform:scale(.96); }
+  .intro .warn{ font-size:12px; color:var(--ink-dim); opacity:.7; line-height:1.5; margin-top:26px; max-width:32ch; }
+  @media (min-width:700px){
+    .stage{ background:radial-gradient(120% 90% at 50% 8%, #251D39, #0C0913); padding:26px; }
+    .device{ width:392px; max-width:none; height:min(848px, calc(100dvh - 52px)); border:13px solid #090909; border-radius:56px; box-shadow:0 30px 80px rgba(0,0,0,.55), inset 0 0 0 2px #2b2b30; }
+    .device::before{ content:''; position:absolute; top:12px; left:50%; transform:translateX(-50%); width:112px; height:26px; background:#000; border-radius:16px; z-index:60; }
+    .header{ padding-top:22px; }
+  }
 </style>
 </head>
 <body>
-<div class="app">
+<div class="stage">
+  <div class="device">
+    <div class="app">
 
-  <!-- 인트로 -->
-  <div class="intro" id="intro">
-    <div class="tag">새벽 2시 · 솔직 상담소</div>
-    <h1>위로는<br>딴 데서 받고,<br><span class="br">여긴 팩폭.</span></h1>
-    <p>듣기 좋은 말 대신 정신 차릴 말 해주는 곳.
-연애 때문에 머리 복잡하면 일단 다 털어놔.</p>
-    <button class="start" id="startBtn">상담 시작 →</button>
-    <p class="warn">⚠️ 재미로 만든 상담 챗봇이에요. 진짜 힘든 일은 가까운 사람이나 전문가에게 꼭 이야기하세요.</p>
-  </div>
+      <div class="intro" id="intro">
+        <div class="clock"><span id="clockH">2:14</span><span class="ap" id="clockAP">AM</span></div>
+        <h1 class="ttl">잠 안 오지? 알아.</h1>
+        <p class="desc">그 답답한 거, 언니가<br>10초 만에 정리해줄게.</p>
+        <button class="start" id="startBtn">들어가자</button>
+        <p class="warn">⚠️ 재미로 만든 챗봇이에요. 진짜 힘든 일은 가까운 사람이나 전문가에게 꼭 얘기하세요.</p>
+      </div>
 
-  <!-- 헤더 -->
-  <header class="header">
-    <div class="avatar">팩</div>
-    <div class="meta">
-      <span class="name">ESTJ 언니</span>
-      <span class="status"><i class="dot"></i> 팩폭 모드 ON</span>
+      <header class="header">
+        <div class="avatar"></div>
+        <div class="meta">
+          <span class="name">ESTJ 언니</span>
+          <span class="status"><i class="dot"></i> 팩폭 모드 ON</span>
+        </div>
+      </header>
+
+      <div class="adslot" id="adslot">
+        <span class="ad-placeholder">광고 자리</span>
+        <div class="ad-disclaimer">이 화면에는 쿠팡 파트너스 활동의 일환으로 광고가 포함될 수 있으며, 이에 따라 일정액의 수수료를 제공받습니다.</div>
+      </div>
+      <script>
+        (function(){
+          var ID = 0; var TRACK = "AF0000000";
+          if(ID && window.PartnersCoupang){
+            var ph = document.querySelector('#adslot .ad-placeholder'); if(ph) ph.remove();
+            try{ new PartnersCoupang.G({ id: ID, trackingCode: TRACK, template: "carousel", width: "100%", height: "100" }); }catch(e){}
+          }
+        })();
+      </script>
+
+      <main class="scroll" id="scroll"></main>
+
+      <div class="composer">
+        <textarea id="input" rows="1" placeholder="고민 털어놔… (예: 읽씹 당했어)"></textarea>
+        <button class="send" id="send" disabled>➤</button>
+      </div>
+
     </div>
-  </header>
-
-  <!-- ▼▼▼ 쿠팡 파트너스 광고 배너 자리 ▼▼▼
-       쿠팡 파트너스 가입 → 배너 만들기(다이나믹 배너) 하면
-       id(숫자)와 trackingCode(AF...)를 줘. 아래 두 값만 바꾸면 끝. -->
-  <div class="adslot" id="adslot">
-    <span class="ad-placeholder">광고 자리</span>
-    <div class="ad-disclaimer">이 화면에는 쿠팡 파트너스 활동의 일환으로 광고가 포함될 수 있으며, 이에 따라 일정액의 수수료를 제공받습니다.</div>
   </div>
-  <script>
-    (function(){
-      var ID    = 0;             // ← 쿠팡 배너 id (숫자). 바꾸면 광고가 켜짐.
-      var TRACK = "AF0000000";   // ← 쿠팡 트래킹코드 (AF로 시작)
-      if(ID && window.PartnersCoupang){
-        var ph = document.querySelector('#adslot .ad-placeholder'); if(ph) ph.remove();
-        try{
-          new PartnersCoupang.G({
-            id: ID, trackingCode: TRACK,
-            template: "carousel", width: "100%", height: "100"
-          });
-        }catch(e){}
-      }
-    })();
-  </script>
-  <!-- ▲▲▲ 쿠팡 파트너스 광고 배너 자리 ▲▲▲ -->
-
-  <!-- 대화 -->
-  <main class="scroll" id="scroll"></main>
-
-  <!-- 입력 -->
-  <div class="composer">
-    <textarea id="input" rows="1" placeholder="고민 털어놔… (예: 읽씹 당했어)"></textarea>
-    <button class="send" id="send" disabled>➤</button>
-  </div>
-
 </div>
 
 <script>
-/* ════════════════════════════════════════════════
-   ESTJ 쓴 언니 — 솔직 팩폭형 연애상담 챗봇 (배포용)
-   API 키는 /api/chat 서버 함수가 숨겨서 처리한다.
-   ════════════════════════════════════════════════ */
-
 const scrollEl = document.getElementById('scroll');
 const inputEl  = document.getElementById('input');
 const sendEl   = document.getElementById('send');
 const introEl  = document.getElementById('intro');
+const history  = [];
 
-/* 대화 기록 (API에 매번 전체를 보내야 기억함) */
-const history = [];
+function two(n){ return n<10 ? '0'+n : ''+n; }
+function updateClock(){
+  const d=new Date(); let h=d.getHours(); const m=d.getMinutes();
+  const ap = h<12 ? 'AM' : 'PM'; let h12 = h%12; if(h12===0) h12=12;
+  document.getElementById('clockH').textContent = h12+':'+two(m);
+  document.getElementById('clockAP').textContent = ap;
+}
+function timeLabel(){
+  const d=new Date(); let h=d.getHours(); const m=d.getMinutes();
+  const ap = h<12 ? '오전' : '오후'; let h12 = h%12; if(h12===0) h12=12;
+  return ap+' '+h12+':'+two(m);
+}
+updateClock(); setInterval(updateClock, 15000);
 
-/* ── 화면에 메시지 추가 ── */
 function addMessage(text, who, hit){
   const row = document.createElement('div');
   row.className = 'row ' + (who === 'me' ? 'me' : 'bot') + (hit ? ' hit' : '');
-  if(who === 'bot'){
-    const mini = document.createElement('div');
-    mini.className = 'mini'; mini.textContent = '팩';
-    row.appendChild(mini);
-  }
-  const b = document.createElement('div');
-  b.className = 'bubble'; b.textContent = text;
-  row.appendChild(b);
-  scrollEl.appendChild(row);
-  scrollEl.scrollTop = scrollEl.scrollHeight;
-  return row;
+  if(who === 'bot'){ const mini = document.createElement('div'); mini.className = 'mini'; row.appendChild(mini); }
+  const b = document.createElement('div'); b.className = 'bubble'; b.textContent = text;
+  row.appendChild(b); scrollEl.appendChild(row); scrollEl.scrollTop = scrollEl.scrollHeight; return row;
 }
-
-/* ── 타이핑 인디케이터 ── */
 function showTyping(){
-  const row = document.createElement('div');
-  row.className = 'row bot typing';
-  row.innerHTML = '<div class="mini">팩</div><div class="bubble"><span></span><span></span><span></span></div>';
-  scrollEl.appendChild(row);
-  scrollEl.scrollTop = scrollEl.scrollHeight;
-  return row;
+  const row = document.createElement('div'); row.className = 'row bot typing';
+  row.innerHTML = '<div class="mini"></div><div class="bubble"><span></span><span></span><span></span></div>';
+  scrollEl.appendChild(row); scrollEl.scrollTop = scrollEl.scrollHeight; return row;
 }
 
-/* ── 추천 칩 ── */
-function showChips(){
-  const wrap = document.createElement('div');
-  wrap.className = 'row bot';
-  const inner = document.createElement('div');
-  inner.className = 'chips';
-  ['읽씹 당했어 😭','자꾸 연락하게 돼','이 사람 날 좋아하는 걸까?','헤어질까 말까'].forEach(t=>{
-    const c = document.createElement('button');
-    c.className = 'chip'; c.textContent = t;
-    c.onclick = ()=>{ wrap.remove(); inputEl.value = t.replace(/[😭]/g,'').trim(); send(); };
-    inner.appendChild(c);
+let entryEl = null;
+function showEntry(){
+  const dl = document.createElement('div'); dl.className='dateline';
+  dl.innerHTML = '<span>'+timeLabel()+'</span>';
+  scrollEl.appendChild(dl);
+  entryEl = document.createElement('div');
+  const hint = document.createElement('div'); hint.className='hint-line';
+  hint.textContent = '고민 하나 골라서 보내거나, 직접 써도 돼.';
+  const chips = document.createElement('div'); chips.className='chips';
+  ['읽씹 당했어 😭','자꾸 연락하게 돼','이 사람 날 좋아하나?','헤어질까 말까'].forEach(t=>{
+    const c = document.createElement('button'); c.className='chip'; c.textContent=t;
+    c.onclick = ()=>{ inputEl.value = t.replace(/[😭]/g,'').trim(); send(); };
+    chips.appendChild(c);
   });
-  wrap.appendChild(inner);
-  scrollEl.appendChild(wrap);
+  entryEl.appendChild(hint); entryEl.appendChild(chips);
+  scrollEl.appendChild(entryEl);
 }
 
-/* ── 서버(/api/chat) 호출 ── */
 async function askClaude(){
-  const res = await fetch("/api/chat", {
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body: JSON.stringify({ messages: history })
-  });
+  const res = await fetch("/api/chat", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ messages: history }) });
   if(!res.ok) throw new Error("status "+res.status);
   const data = await res.json();
   return data.content.map(c => c.type === "text" ? c.text : "").join("").trim();
 }
 
-/* ── 메시지 전송 ── */
 let busy = false;
 async function send(){
   const text = inputEl.value.trim();
   if(!text || busy) return;
+  if(entryEl){ entryEl.remove(); entryEl = null; }
   busy = true; sendEl.disabled = true;
-
-  addMessage(text, 'me');
-  history.push({ role:"user", content:text });
+  addMessage(text, 'me'); history.push({ role:"user", content:text });
   inputEl.value = ''; autoGrow();
-
   const typing = showTyping();
   try{
-    const reply = await askClaude();
-    typing.remove();
-    addMessage(reply, 'bot', true);
-    history.push({ role:"assistant", content:reply });
+    const reply = await askClaude(); typing.remove();
+    addMessage(reply, 'bot', true); history.push({ role:"assistant", content:reply });
   }catch(err){
     typing.remove();
     addMessage("어… 지금 머리가 안 돌아가네. 잠깐 있다 다시 말 걸어봐.", 'bot');
     console.error(err);
-  }finally{
-    busy = false; sendEl.disabled = inputEl.value.trim()==='';
-  }
+  }finally{ busy = false; sendEl.disabled = inputEl.value.trim()===''; }
 }
 
-/* ── 입력창 자동 높이 ── */
 function autoGrow(){
   inputEl.style.height = 'auto';
   inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px';
   sendEl.disabled = inputEl.value.trim()==='' || busy;
 }
 inputEl.addEventListener('input', autoGrow);
-inputEl.addEventListener('keydown', e=>{
-  if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); send(); }
-});
+inputEl.addEventListener('keydown', e=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); send(); } });
 sendEl.addEventListener('click', send);
 
-/* ── 시작 ── */
 document.getElementById('startBtn').addEventListener('click', ()=>{
   introEl.classList.add('hide');
-  setTimeout(()=>{
-    addMessage("왔어? 무슨 일인데. 빙빙 돌리지 말고 핵심만 말해봐.", 'bot');
-    showChips();
-    inputEl.focus();
-  }, 250);
+  setTimeout(()=>{ showEntry(); inputEl.focus(); }, 250);
 });
 </script>
 </body>

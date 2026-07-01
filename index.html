@@ -9,6 +9,8 @@
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <style>
   @font-face{ font-family:'Kkukkukk'; src:url('kkukkukk.woff2') format('woff2'); font-display:swap; }
+  @font-face{ font-family:'Warhaven'; src:url('warhaven.woff2') format('woff2'); font-display:swap; }
+  @font-face{ font-family:'NexonLv2'; src:url('nexonlv2.woff2') format('woff2'); font-display:swap; }
   :root{ --bg:#F4F4F3; --surface:#FFFFFF; --line:#E7E7E7; --ink:#454545; --ink-dim:#9A9A9A; --border:#3B3B3B; --send:#5B5B5B; --kakao:#FAE100; }
   *{ box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
   html,body{ height:100%; }
@@ -65,10 +67,36 @@
   .tps{ color:#B89BD6; font-size:12px; margin-top:5px; }
   .tpc{ margin-top:12px; color:#E6C878; font-size:22px; font-weight:800; letter-spacing:2px; }
   .tfan{ position:relative; width:320px; max-width:96vw; height:180px; margin-top:22px; }
-  .tcd{ position:absolute; left:50%; bottom:6px; width:50px; height:78px; border-radius:9px; background:linear-gradient(160deg,#3A2B57,#241A39); border:1.4px solid #6B5A8F; transform-origin:center bottom; display:grid; place-items:center; color:#C9A86A; font-size:15px; box-shadow:0 4px 12px rgba(0,0,0,.35); cursor:pointer; transition:transform .22s cubic-bezier(.2,.8,.25,1), box-shadow .2s, border-color .2s; }
+  .tcd{ position:absolute; left:50%; bottom:6px; width:50px; height:78px; border-radius:9px; background:linear-gradient(160deg,#3A2B57,#241A39); border:1.4px solid #6B5A8F; transform-origin:center bottom; display:grid; place-items:center; color:#C9A86A; font-size:15px; box-shadow:0 4px 12px rgba(0,0,0,.35); cursor:pointer; transition:transform .22s cubic-bezier(.2,.8,.25,1), box-shadow .2s, border-color .2s; overflow:hidden; }
   .tcd.sel{ border-color:#E6C878; box-shadow:0 0 0 2px #E6C878, 0 12px 24px rgba(0,0,0,.55); z-index:30; }
   .tpbtn{ margin-top:16px; background:#E6C878; color:#2a1c10; border:none; border-radius:14px; padding:13px 30px; font-size:16px; font-weight:800; font-family:'Pretendard',sans-serif; cursor:pointer; }
   .tpbtn:disabled{ background:#5B4C6E; color:#9a8ab0; cursor:not-allowed; }
+  .tres{ position:absolute; inset:0; z-index:45; background:rgba(11,7,19,.88); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; padding:20px 14px; overflow-y:auto; animation:fadein .3s both; }
+  .tresc{ width:300px; max-width:100%; background:linear-gradient(170deg,#241a3c,#160f28 55%,#0f0a1e); border:1.5px solid #C9A86A; border-radius:24px; padding:20px 18px 16px; box-shadow:0 18px 50px rgba(0,0,0,.6); }
+  .trtop{ display:flex; justify-content:space-between; align-items:center; }
+  .trttl{ color:#E6C878; font-size:17px; letter-spacing:1px; font-family:'Warhaven','Pretendard',sans-serif; }
+  .trdate{ color:#8A78A8; font-size:12px; }
+  .trrow{ display:flex; gap:8px; justify-content:center; margin-top:16px; }
+  .trcol{ text-align:center; }
+  .trpos{ font-size:11px; margin-bottom:5px; font-weight:700; }
+  .trcw{ width:80px; height:118px; perspective:750px; margin:0 auto; }
+  .trci{ position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .85s cubic-bezier(.2,.85,.25,1); }
+  .trci.flipped{ transform:rotateY(180deg); }
+  .trbk,.trfc{ position:absolute; inset:0; -webkit-backface-visibility:hidden; backface-visibility:hidden; border-radius:11px; overflow:hidden; background:linear-gradient(165deg,#2C2247,#140C24); }
+  .trfc{ transform:rotateY(180deg); }
+  .trrn{ position:absolute; top:11px; left:0; right:0; text-align:center; font-size:8px; color:#D8B878; letter-spacing:1px; }
+  .trsym{ position:absolute; top:42px; left:0; right:0; display:flex; justify-content:center; }
+  .trkr{ position:absolute; bottom:19px; left:0; right:0; text-align:center; font-size:14px; font-weight:800; color:#F1E6C8; }
+  .tren{ position:absolute; bottom:9px; left:0; right:0; text-align:center; font-size:6.5px; color:#C9A86A; letter-spacing:.5px; }
+  .trhead{ text-align:center; margin-top:18px; color:#E6C878; font-size:26px; line-height:1.25; font-family:'Warhaven','Pretendard',sans-serif; min-height:30px; opacity:0; transition:opacity .6s; }
+  .trhead.on{ opacity:1; }
+  .trbody{ margin-top:12px; background:rgba(255,255,255,.05); border:1px solid rgba(201,168,106,.28); border-radius:14px; padding:14px; color:#EDE6DA; font-size:13.5px; line-height:1.72; font-family:'NexonLv2','Pretendard',sans-serif; min-height:44px; }
+  .trdots{ display:flex; gap:5px; justify-content:center; padding:8px 0; }
+  .trdots span{ width:7px; height:7px; border-radius:50%; background:#8A78A8; animation:blink 1.2s infinite; }
+  .trdots span:nth-child(2){ animation-delay:.2s; } .trdots span:nth-child(3){ animation-delay:.4s; }
+  .trclose{ margin-top:13px; width:100%; background:transparent; color:#C9A86A; border:1px solid #6B5A8F; border-radius:12px; padding:12px 0; font-size:14px; font-weight:700; font-family:'Pretendard',sans-serif; cursor:pointer; opacity:0; pointer-events:none; transition:opacity .4s; }
+  .trclose.on{ opacity:1; pointer-events:auto; }
+  .trbrand{ text-align:center; margin-top:11px; color:#6E5F8C; font-size:10px; letter-spacing:1px; }
   .composer{ flex:0 0 auto; padding:10px 12px calc(10px + env(safe-area-inset-bottom)); border-top:1px solid var(--line); display:flex; gap:9px; align-items:flex-end; background:#F7F7F7; }
   .composer textarea{ flex:1; resize:none; border:1px solid var(--line); background:#fff; color:#333; border-radius:18px; padding:10px 14px; font-family:inherit; font-size:15px; line-height:1.4; max-height:120px; outline:none; }
   .composer textarea::placeholder{ color:#b3b3b3; }
@@ -181,6 +209,9 @@ const DECK=[
   {kr:'힘',en:'STRENGTH',roman:'VIII',sym:`<path d="M20,29 a6.5,6.5 0 1 1 10,0 a6.5,6.5 0 1 0 10,0 a6.5,6.5 0 1 1 -10,0 a6.5,6.5 0 1 0 -10,0 Z" fill="none" stroke="#E6C878" stroke-width="2.5"/>`}
 ];
 let tarotDrawn=null;
+const BACK_SVG='<svg viewBox="0 0 120 180" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" fill="none"><g stroke="#C9A86A"><rect x="6" y="6" width="108" height="168" rx="10" stroke-width="1.1"/><rect x="10.5" y="10.5" width="99" height="159" rx="6.5" stroke-width="0.6" opacity=".6"/><path d="M16 28 Q16 16 28 16" stroke-width="0.7" opacity=".85"/><path d="M104 28 Q104 16 92 16" stroke-width="0.7" opacity=".85"/><path d="M16 152 Q16 164 28 164" stroke-width="0.7" opacity=".85"/><path d="M104 152 Q104 164 92 164" stroke-width="0.7" opacity=".85"/><circle cx="60" cy="26" r="3.2" stroke-width="0.8"/><path d="M60 34 a5 5 0 1 0 0 10 a3.6 3.6 0 1 1 0 -10 z" fill="#C9A86A" stroke="none"/><circle cx="60" cy="154" r="3.2" stroke-width="0.8"/><path d="M60 136 a5 5 0 1 0 0 10 a3.6 3.6 0 1 1 0 -10 z" fill="#C9A86A" stroke="none"/><circle cx="60" cy="90" r="33" stroke-width="1.3" stroke-dasharray="1 5"/><circle cx="60" cy="90" r="27" stroke-width="0.9"/><circle cx="60" cy="90" r="19" stroke-width="0.55" opacity=".65"/><g fill="#C9A86A" stroke="none"><path d="M60 60 L63 63 L60 66 L57 63 Z"/><path d="M60 114 L63 117 L60 120 L57 117 Z"/><path d="M90 87 L93 90 L90 93 L87 90 Z"/><path d="M30 87 L33 90 L30 93 L27 90 Z"/></g><path d="M63 80 A10 10 0 1 0 63 100 A7.5 7.5 0 1 1 63 80 Z" fill="#E6C878" stroke="none"/><g fill="#E6C878" stroke="none"><path d="M39 58 L40 61 L43 62 L40 63 L39 66 L38 63 L35 62 L38 61 Z"/><path d="M81 58 L82 61 L85 62 L82 63 L81 66 L80 63 L77 62 L80 61 Z"/></g></g></svg>';
+function frameSVG(color){return '<svg viewBox="0 0 84 124" width="100%" height="100%" style="position:absolute;inset:0" fill="none" stroke="'+color+'"><rect x="4" y="4" width="76" height="116" rx="8" stroke-width="0.9"/><rect x="7.5" y="7.5" width="69" height="109" rx="5" stroke-width="0.5" opacity="0.55"/><circle cx="42" cy="62" r="24" stroke-width="0.9" stroke-dasharray="1 4" opacity="0.85"/></svg>';}
+function faceInner(c,hi){return frameSVG(hi?'#E6C878':'#C9A86A')+'<div class="trrn">'+c.roman+'</div><div class="trsym"><svg width="38" height="38" viewBox="0 0 60 60">'+c.sym+'</svg></div><div class="trkr">'+c.kr+'</div><div class="tren">'+c.en+'</div>';}
 function showTarotButton(){
   const wrap=document.createElement('div');wrap.className='tbtnwrap';
   const btn=document.createElement('button');btn.className='tbtn';btn.textContent='🔮 타로 보기';
@@ -191,7 +222,7 @@ function openTarotPicker(){
   const idx=DECK.map((_,i)=>i);tarotDrawn=[];
   for(let i=0;i<3;i++){const j=Math.floor(Math.random()*idx.length);tarotDrawn.push(DECK[idx[j]]);idx.splice(j,1);}
   const N=11; let fan='';
-  for(let i=0;i<N;i++){const t=i-(N-1)/2;const x=Math.round(t*26);const r=(t*4).toFixed(1);const y=Math.round(Math.abs(t)*3);const base='translate(-50%,0) translate('+x+'px,'+y+'px) rotate('+r+'deg)';const lift='translate(-50%,0) translate('+x+'px,'+(y-32)+'px) rotate('+r+'deg)';fan+='<div class="tcd" data-b="'+base+'" data-l="'+lift+'" style="transform:'+base+'">✦</div>';}
+  for(let i=0;i<N;i++){const t=i-(N-1)/2;const x=Math.round(t*26);const r=(t*4).toFixed(1);const y=Math.round(Math.abs(t)*3);const base='translate(-50%,0) translate('+x+'px,'+y+'px) rotate('+r+'deg)';const lift='translate(-50%,0) translate('+x+'px,'+(y-32)+'px) rotate('+r+'deg)';fan+='<div class="tcd" data-b="'+base+'" data-l="'+lift+'" style="transform:'+base+'">'+BACK_SVG+'</div>';}
   const over=document.createElement('div');over.className='tover';
   over.innerHTML='<div class="tpk"><div class="tpt">마음 가는 <b>카드 3장</b>을 골라봐</div><div class="tps">고민 떠올리면서 천천히</div><div class="tpc"><span id="tpcnt">0</span> / 3</div><div class="tfan">'+fan+'</div><button class="tpbtn" id="tpbtn" disabled>3장 골라줘</button></div>';
   document.querySelector('.device').appendChild(over);
@@ -205,31 +236,46 @@ function openTarotPicker(){
       const btn=over.querySelector('#tpbtn');btn.disabled=c<3;btn.textContent=c<3?(3-c)+'장 더 골라':'이 3장으로 볼게';
     };
   });
-  over.querySelector('#tpbtn').onclick=()=>{if(selected.length<3)return;over.remove();revealTarot();};
+  over.querySelector('#tpbtn').onclick=()=>{if(selected.length<3)return;over.remove();showTarotResult();};
 }
-function revealTarot(){
-  const POS=['과거','현재','미래'];
-  const draw=document.createElement('div');draw.className='tdraw';
-  tarotDrawn.forEach((c,i)=>{
-    const col=document.createElement('div');col.className='tcol';
-    col.innerHTML='<div class="tpos">'+POS[i]+'</div><div class="tcw"><div class="tci"><div class="tbk">✦</div><div class="tfc"><div class="troman">'+c.roman+'</div><svg width="52" height="52" viewBox="0 0 60 60">'+c.sym+'</svg><div class="tkr">'+c.kr+'</div><div class="ten">'+c.en+'</div></div></div></div>';
-    draw.appendChild(col);
-  });
-  scrollEl.appendChild(draw);scrollDown();
-  const cards=draw.querySelectorAll('.tci');
-  cards.forEach((ci,i)=>setTimeout(()=>{ci.classList.add('flipped');scrollDown();},350+i*500));
-  setTimeout(finishTarot,350+3*500+400);
-}
-function finishTarot(){
-  if(busy)return;
-  const POS=['과거','현재','미래'];
+function showTarotResult(){
+  const POS=['과거','현재','미래'], PC=['#B89BD6','#E6C878','#B89BD6'];
+  const d=new Date(), dstr=d.getFullYear()+'.'+two(d.getMonth()+1)+'.'+two(d.getDate());
+  let cards='';
+  tarotDrawn.forEach((c,i)=>{cards+='<div class="trcol"><div class="trpos" style="color:'+PC[i]+'">'+POS[i]+'</div><div class="trcw"><div class="trci" id="trc'+i+'"><div class="trbk">'+BACK_SVG+'</div><div class="trfc">'+faceInner(c,i===1)+'</div></div></div></div>';});
+  const over=document.createElement('div');over.className='tres';
+  over.innerHTML='<div class="tresc"><div class="trtop"><div class="trttl">🔮 언니의 타로</div><div class="trdate">'+dstr+'</div></div><div class="trrow">'+cards+'</div><div class="trhead" id="trhead"></div><div class="trbody" id="trbody"><div class="trdots"><span></span><span></span><span></span></div></div><button class="trclose" id="trclose">닫기</button><div class="trbrand">언니한테 톡</div></div>';
+  document.querySelector('.device').appendChild(over);
+  const t0=performance.now(), REVEAL=400+3*550+300;
+  tarotDrawn.forEach((c,i)=>setTimeout(()=>{const el=document.getElementById('trc'+i);if(el)el.classList.add('flipped');},400+i*550));
+  const closeBtn=over.querySelector('#trclose');
+  closeBtn.onclick=()=>{
+    over.remove();
+    const b=over.__body;
+    if(b){addMessage((over.__head?'「'+over.__head+'」\n':'')+b,'bot');}
+  };
   const names=tarotDrawn.map((c,i)=>POS[i]+' '+c.kr+'('+c.en+')').join(', ');
   history.push({role:'user',content:'방금 타로 카드 3장 뽑았어. '+names+' 나왔어. 이 카드들로 지금 내 상황 봐줘.'});
-  busy=true;sendEl.disabled=true;
-  const typing=showTyping();
-  askClaude().then(reply=>{typing.remove();const clean=reply.replace(/\[\[타로\]\]/g,'').trim();addMessage(clean,'bot');history.push({role:'assistant',content:clean});})
-    .catch(err=>{typing.remove();addMessage('어 잠깐, 카드 해석이 지금 안 되네. 좀 있다 다시.','bot');console.error(err);})
-    .finally(()=>{busy=false;sendEl.disabled=inputEl.value.trim()==='';});
+  askClaude().then(reply=>{
+    const clean=reply.replace(/\[\[타로\]\]/g,'').trim();
+    history.push({role:'assistant',content:clean});
+    let head='',body=clean;
+    const k=clean.indexOf('||');
+    if(k!==-1){head=clean.slice(0,k).trim().replace(/^["“”'\s]+|["“”'\s]+$/g,'');body=clean.slice(k+2).trim();}
+    over.__head=head;over.__body=body;
+    const wait=Math.max(0,REVEAL-(performance.now()-t0));
+    setTimeout(()=>{
+      const hEl=over.querySelector('#trhead'),bEl=over.querySelector('#trbody');
+      if(head){hEl.textContent='“'+head+'”';hEl.classList.add('on');}
+      bEl.textContent=body;
+      closeBtn.classList.add('on');
+    },wait);
+  }).catch(err=>{
+    console.error(err);
+    over.__body='어 잠깐, 카드 해석이 지금 안 되네. 좀 있다 다시.';
+    const wait=Math.max(0,REVEAL-(performance.now()-t0));
+    setTimeout(()=>{over.querySelector('#trbody').textContent=over.__body;closeBtn.classList.add('on');},wait);
+  });
 }
 async function askClaude(){const res=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:history})});if(!res.ok)throw new Error("status "+res.status);const data=await res.json();return data.content.map(c=>c.type==="text"?c.text:"").join("").trim();}
 let busy=false;

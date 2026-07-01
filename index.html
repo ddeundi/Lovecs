@@ -3,74 +3,80 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>새벽 2시 · ESTJ 언니</title>
-
+<title>언니한테 톡</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-
 <style>
-  :root{
-    --bg:#1C1726; --surface:#271F33; --surface-2:#2E2540; --line:#342B45;
-    --ink:#ECE6F4; --ink-dim:#9385A3; --punch:#9A79BE; --gold:#D8B878; --user:#9A79BE;
-  }
+  :root{ --bg:#F4F4F3; --surface:#FFFFFF; --line:#E7E7E7; --ink:#454545; --ink-dim:#9A9A9A; --border:#3B3B3B; --send:#5B5B5B; --kakao:#FAE100; }
   *{ box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
   html,body{ height:100%; }
-  body{ background:var(--bg); color:var(--ink); font-family:'Pretendard',-apple-system,sans-serif; overflow:hidden; }
-  .stage{ min-height:100dvh; display:flex; align-items:center; justify-content:center; background:var(--bg); }
+  body{ background:#000; color:var(--ink); font-family:'Pretendard',-apple-system,sans-serif; overflow:hidden; }
+  .stage{ min-height:100dvh; display:flex; align-items:center; justify-content:center; background:#000; }
   .device{ position:relative; width:100%; max-width:480px; height:100dvh; background:var(--bg); overflow:hidden; }
   .app{ width:100%; height:100%; display:flex; flex-direction:column; position:relative; }
-  .header{ flex:0 0 auto; padding:14px 16px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:11px; background:var(--bg); z-index:5; }
-  .avatar{ width:40px; height:40px; border-radius:14px; flex:0 0 auto; background-color:#8A6FB8; background-image:url('unni.jpg'); background-size:cover; background-position:center 30%; }
-  .header .meta{ display:flex; flex-direction:column; line-height:1.25; }
-  .header .name{ font-weight:700; font-size:16px; letter-spacing:-.02em; }
-  .header .status{ font-size:12px; color:var(--ink-dim); display:flex; align-items:center; gap:5px; }
-  .dot{ width:6px; height:6px; border-radius:50%; background:#3DDC84; box-shadow:0 0 8px #3DDC84; }
-  .adslot{ flex:0 0 auto; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:6px 0; overflow:hidden; background:var(--surface); border-bottom:1px solid var(--line); }
-  .ad-disclaimer{ font-size:10px; color:var(--ink-dim); opacity:.6; text-align:center; line-height:1.4; padding:0 14px; margin-top:5px; }
-  .scroll{ flex:1 1 auto; overflow-y:auto; padding:18px 16px 12px; display:flex; flex-direction:column; gap:13px; scroll-behavior:smooth; }
+  .header{ flex:0 0 auto; padding:12px 15px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:10px; background:var(--surface); z-index:5; }
+  .avatar{ width:38px; height:38px; border-radius:13px; flex:0 0 auto; background:#EEE url('kitty.png') center/86% no-repeat; }
+  .header .name{ font-weight:700; font-size:15.5px; color:#4A4A4A; }
+  .header .status{ font-size:11px; color:var(--ink-dim); display:flex; align-items:center; gap:5px; margin-top:1px; }
+  .dot{ width:6px; height:6px; border-radius:50%; background:#3DDC84; }
+  .adslot{ flex:0 0 auto; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:5px 0; background:#EFEFEE; border-bottom:1px solid var(--line); }
+  .ad-disclaimer{ font-size:10px; color:#a9a9a9; text-align:center; line-height:1.4; padding:0 14px; margin-top:4px; }
+  .scroll{ flex:1 1 auto; overflow-y:auto; padding:16px 14px 12px; display:flex; flex-direction:column; gap:12px; scroll-behavior:smooth; }
   .scroll::-webkit-scrollbar{ width:0; }
-  .dateline{ align-self:center; margin:4px 0 8px; }
-  .dateline span{ font-size:11px; color:var(--ink-dim); background:var(--surface); padding:4px 12px; border-radius:999px; }
-  .hint-line{ font-size:12px; color:#7A6E8A; margin:2px 2px 6px; }
-  .row{ display:flex; gap:9px; max-width:100%; animation:rise .35s cubic-bezier(.2,.8,.2,1) both; }
+  .dateline{ align-self:center; margin:4px 0 6px; }
+  .dateline span{ font-size:11px; color:#8f8f8f; background:#E9E9E8; padding:4px 12px; border-radius:999px; }
+  .hint-line{ font-size:12px; color:#a5a5a5; margin:2px 2px 4px; }
+  .row{ display:flex; gap:7px; max-width:100%; align-items:flex-end; animation:rise .3s ease both; }
   .row.me{ justify-content:flex-end; }
-  .row .mini{ width:36px; height:36px; border-radius:13px; flex:0 0 auto; margin-top:2px; background-color:#8A6FB8; background-image:url('unni.jpg'); background-size:cover; background-position:center 30%; }
-  .bubble{ padding:9px 12px; border-radius:16px; font-size:15px; line-height:1.5; max-width:78%; word-break:break-word; letter-spacing:-.01em; white-space:pre-wrap; }
-  .bot .bubble{ background:var(--surface-2); color:var(--ink); border-top-left-radius:4px; }
-  .me .bubble{ background:var(--user); color:#FFFFFF; font-weight:400; border-top-right-radius:4px; }
-  .bot.hit .bubble{ animation:hit .5s cubic-bezier(.36,.07,.19,.97) both; }
-  @keyframes rise{ from{ opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;} }
-  @keyframes hit{ 0%{transform:translateX(0);} 20%{transform:translateX(-4px);} 40%{transform:translateX(4px);} 60%{transform:translateX(-2px);} 80%{transform:translateX(2px);} 100%{transform:translateX(0);} }
-  .typing .bubble{ display:flex; gap:5px; align-items:center; padding:15px; }
-  .typing span{ width:7px; height:7px; border-radius:50%; background:var(--ink-dim); animation:blink 1.2s infinite; }
+  .row .mini{ width:34px; height:34px; border-radius:12px; flex:0 0 auto; background:#EEE url('kitty.png') center/88% no-repeat; }
+  .bubble{ background:var(--surface); border:1.6px solid var(--border); border-radius:19px; padding:8px 12px; font-size:14.5px; color:var(--ink); line-height:1.45; max-width:72%; word-break:break-word; white-space:pre-wrap; }
+  .bot .bubble{ border-top-left-radius:5px; }
+  .me .bubble{ border-top-right-radius:5px; }
+  @keyframes rise{ from{ opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+  .typing .bubble{ display:flex; gap:5px; align-items:center; padding:12px 14px; }
+  .typing span{ width:7px; height:7px; border-radius:50%; background:#c4c4c4; animation:blink 1.2s infinite; }
   .typing span:nth-child(2){ animation-delay:.2s; } .typing span:nth-child(3){ animation-delay:.4s; }
-  @keyframes blink{ 0%,60%,100%{opacity:.25; transform:translateY(0);} 30%{opacity:1; transform:translateY(-3px);} }
-  .chips{ display:flex; flex-wrap:wrap; gap:8px; padding:2px 0; }
-  .chip{ border:1px solid var(--line); background:var(--surface); color:#C4B6D6; font-size:13px; padding:9px 13px; border-radius:999px; cursor:pointer; transition:.15s; font-family:inherit; }
-  .chip:hover,.chip:active{ color:var(--ink); border-color:var(--punch); background:#2f2740; }
-  .composer{ flex:0 0 auto; padding:12px 14px calc(12px + env(safe-area-inset-bottom)); border-top:1px solid var(--line); display:flex; gap:10px; align-items:flex-end; background:var(--bg); }
-  .composer textarea{ flex:1; resize:none; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:16px; padding:12px 14px; font-family:inherit; font-size:15px; line-height:1.4; max-height:120px; outline:none; transition:border-color .15s; }
-  .composer textarea:focus{ border-color:var(--punch); }
-  .composer textarea::placeholder{ color:var(--ink-dim); }
-  .send{ width:44px; height:44px; flex:0 0 auto; border:none; border-radius:50%; background:var(--punch); color:#FFFFFF; font-size:18px; cursor:pointer; display:grid; place-items:center; transition:transform .12s, opacity .15s; }
+  @keyframes blink{ 0%,60%,100%{opacity:.3; transform:translateY(0);} 30%{opacity:1; transform:translateY(-3px);} }
+  .chips{ display:flex; flex-wrap:wrap; gap:7px; padding:2px 0; }
+  .chip{ border:1.4px solid var(--border); background:#fff; color:#555; font-size:13px; padding:8px 13px; border-radius:999px; cursor:pointer; font-family:inherit; }
+  .chip:active{ background:#f2f2f2; }
+  .composer{ flex:0 0 auto; padding:10px 12px calc(10px + env(safe-area-inset-bottom)); border-top:1px solid var(--line); display:flex; gap:9px; align-items:flex-end; background:#F7F7F7; }
+  .composer textarea{ flex:1; resize:none; border:1px solid var(--line); background:#fff; color:#333; border-radius:18px; padding:10px 14px; font-family:inherit; font-size:15px; line-height:1.4; max-height:120px; outline:none; }
+  .composer textarea::placeholder{ color:#b3b3b3; }
+  .send{ width:40px; height:40px; flex:0 0 auto; border:1px solid var(--line); border-radius:50%; background:#fff; color:var(--send); font-size:16px; cursor:pointer; display:grid; place-items:center; transition:.12s; }
   .send:active{ transform:scale(.92); }
   .send:disabled{ opacity:.4; cursor:not-allowed; }
-  .intro{ position:absolute; inset:0; z-index:20; background:var(--bg); display:flex; flex-direction:column; justify-content:center; padding:34px 30px; gap:6px; transition:opacity .4s, transform .4s; }
-  .intro.hide{ opacity:0; transform:scale(1.04); pointer-events:none; }
-  .clock{ font-family:'Black Han Sans',sans-serif; font-size:clamp(60px,20vw,84px); line-height:1; color:var(--ink); letter-spacing:1px; }
-  .clock .ap{ font-size:.3em; color:#A98BD0; margin-left:10px; letter-spacing:1px; }
-  .intro .ttl{ font-family:'Black Han Sans',sans-serif; font-weight:400; font-size:clamp(27px,7.5vw,33px); line-height:1.15; color:var(--ink); margin-top:16px; }
-  .intro p.desc{ color:var(--ink-dim); font-size:15px; line-height:1.65; margin-top:12px; }
-  .start{ margin-top:22px; align-self:flex-start; font-family:'Black Han Sans',sans-serif; font-size:19px; color:#FFFFFF; background:var(--punch); border:none; border-radius:15px; padding:15px 30px; cursor:pointer; transition:transform .12s; }
-  .start:active{ transform:scale(.96); }
-  .intro .warn{ font-size:12px; color:var(--ink-dim); opacity:.7; line-height:1.5; margin-top:26px; max-width:32ch; }
+  .lock{ position:absolute; inset:0; z-index:20; overflow:hidden; background:#3a2a1a url('wallpaper.jpg') center/cover no-repeat; display:flex; flex-direction:column; color:#fff; transition:opacity .45s, transform .45s; }
+  .lock.hide{ opacity:0; transform:scale(1.05); pointer-events:none; }
+  .lock::before{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.12), transparent 30%, transparent 70%, rgba(0,0,0,.18)); }
+  .sbar{ position:relative; z-index:3; display:flex; align-items:center; justify-content:space-between; padding:14px 22px 0; font-size:14px; font-weight:600; text-shadow:0 1px 3px rgba(0,0,0,.25); }
+  .sbar .rgt{ display:flex; align-items:center; gap:6px; }
+  .bat{ width:23px; height:11px; border:1.3px solid rgba(255,255,255,.85); border-radius:3px; position:relative; }
+  .bat i{ position:absolute; left:1.5px; top:1.5px; bottom:1.5px; width:60%; background:#fff; border-radius:1px; }
+  .isl{ position:absolute; top:11px; left:50%; transform:translateX(-50%); width:90px; height:26px; background:#000; border-radius:15px; z-index:4; }
+  .lclock{ position:relative; z-index:3; text-align:center; margin-top:30px; text-shadow:0 2px 10px rgba(0,0,0,.2); }
+  .ldate{ font-size:16px; font-weight:600; }
+  .ltime{ font-size:78px; font-weight:300; line-height:1.05; letter-spacing:-1px; margin-top:2px; }
+  .noti{ position:relative; z-index:3; margin:auto 12px 0; width:calc(100% - 24px); background:rgba(250,250,250,.82); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-radius:22px; padding:12px 13px; display:flex; gap:11px; align-items:flex-start; box-shadow:0 6px 22px rgba(0,0,0,.16); cursor:pointer; border:none; text-align:left; animation:notiIn .5s .3s both; }
+  @keyframes notiIn{ from{ opacity:0; transform:translateY(-12px);} to{opacity:1; transform:none;} }
+  .kicon{ width:40px; height:40px; border-radius:11px; background:var(--kakao); flex:0 0 auto; position:relative; }
+  .kbub{ position:absolute; top:10px; left:8px; width:24px; height:17px; background:#3B1E1E; border-radius:9px; }
+  .kbub::after{ content:''; position:absolute; bottom:-3px; left:5px; width:6px; height:6px; background:#3B1E1E; transform:rotate(45deg); border-radius:1px; }
+  .nbody{ flex:1; min-width:0; }
+  .nrow{ display:flex; justify-content:space-between; align-items:baseline; }
+  .ntitle{ font-size:15px; font-weight:700; color:#111; }
+  .ntime{ font-size:12px; color:#8a8a8e; }
+  .nmsg{ font-size:14px; color:#1c1c1e; margin-top:2px; line-height:1.35; }
+  .lhint{ position:relative; z-index:3; text-align:center; font-size:11px; color:rgba(255,255,255,.85); margin-top:9px; text-shadow:0 1px 4px rgba(0,0,0,.3); }
+  .lbtm{ position:relative; z-index:3; display:flex; justify-content:space-between; padding:0 42px; margin-top:16px; margin-bottom:14px; }
+  .rd{ width:44px; height:44px; border-radius:50%; background:rgba(0,0,0,.25); display:grid; place-items:center; font-size:17px; }
+  .hbar{ position:relative; z-index:3; width:120px; height:5px; border-radius:3px; background:rgba(255,255,255,.85); margin:0 auto 8px; }
   @media (min-width:700px){
-    .stage{ background:radial-gradient(120% 90% at 50% 8%, #251D39, #0C0913); padding:26px; }
-    .device{ width:392px; max-width:none; height:min(848px, calc(100dvh - 52px)); border:13px solid #090909; border-radius:56px; box-shadow:0 30px 80px rgba(0,0,0,.55), inset 0 0 0 2px #2b2b30; }
+    .stage{ background:#0c0c0f; padding:26px; }
+    .device{ width:392px; max-width:none; height:min(848px, calc(100dvh - 52px)); border:13px solid #090909; border-radius:56px; box-shadow:0 30px 80px rgba(0,0,0,.55); }
     .device::before{ content:''; position:absolute; top:12px; left:50%; transform:translateX(-50%); width:112px; height:26px; background:#000; border-radius:16px; z-index:60; }
-    .header{ padding-top:22px; }
+    .header{ padding-top:20px; } .sbar{ padding-top:16px; }
   }
 </style>
 </head>
@@ -78,133 +84,66 @@
 <div class="stage">
   <div class="device">
     <div class="app">
-
-      <div class="intro" id="intro">
-        <div class="clock"><span id="clockH">2:14</span><span class="ap" id="clockAP">AM</span></div>
-        <h1 class="ttl">잠 안 오지? 알아.</h1>
-        <p class="desc">그 답답한 거, 언니가<br>10초 만에 정리해줄게.</p>
-        <button class="start" id="startBtn">토로하기</button>
-        <p class="warn">⚠️ 재미로 만든 챗봇이에요. 진짜 힘든 일은 가까운 사람이나 전문가에게 꼭 얘기하세요.</p>
+      <div class="lock" id="lock">
+        <div class="isl"></div>
+        <div class="sbar">
+          <div class="lft">KT&nbsp; 🔕</div>
+          <div class="rgt"><span style="letter-spacing:1px">••ıl</span> LTE <span class="bat"><i></i></span></div>
+        </div>
+        <div class="lclock">
+          <div class="ldate" id="lockDate">7월 1일 (수)</div>
+          <div class="ltime" id="lockTime">1:55</div>
+        </div>
+        <button class="noti" id="notiBtn">
+          <div class="kicon"><div class="kbub"></div></div>
+          <div class="nbody">
+            <div class="nrow"><span class="ntitle">언니</span><span class="ntime">지금</span></div>
+            <div class="nmsg">전화했었네? 무슨 일 있어?</div>
+          </div>
+        </button>
+        <div class="lhint">알림을 눌러봐</div>
+        <div class="lbtm"><div class="rd">🔦</div><div class="rd">📷</div></div>
+        <div class="hbar"></div>
       </div>
-
       <header class="header">
         <div class="avatar"></div>
-        <div class="meta">
-          <span class="name">ESTJ 언니</span>
-          <span class="status"><i class="dot"></i> 팩폭 모드 ON</span>
+        <div>
+          <div class="name">언니</div>
+          <div class="status"><i class="dot"></i> 보통 바로 답함</div>
         </div>
       </header>
-
-      <!-- 쿠팡 파트너스 배너 -->
       <div class="adslot">
         <a href="https://link.coupang.com/a/e1qYqnU6H6" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
           <img src="https://ads-partners.coupang.com/banners/1002032?trackingCode=AF2895754&subId=&traceId=V0-301-879dd1202e5c73b2-I1002032&w=728&h=90" alt="쿠팡 광고" style="max-width:100%;height:auto;display:block;border:0" />
         </a>
         <div class="ad-disclaimer">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</div>
       </div>
-
       <main class="scroll" id="scroll"></main>
-
       <div class="composer">
-        <textarea id="input" rows="1" placeholder="고민 털어놔… (예: 읽씹 당했어)"></textarea>
+        <textarea id="input" rows="1" placeholder="메시지 입력"></textarea>
         <button class="send" id="send" disabled>➤</button>
       </div>
-
     </div>
   </div>
 </div>
-
 <script>
-const scrollEl = document.getElementById('scroll');
-const inputEl  = document.getElementById('input');
-const sendEl   = document.getElementById('send');
-const introEl  = document.getElementById('intro');
-const history  = [];
-
-function two(n){ return n<10 ? '0'+n : ''+n; }
-function updateClock(){
-  const d=new Date(); let h=d.getHours(); const m=d.getMinutes();
-  const ap = h<12 ? 'AM' : 'PM'; let h12 = h%12; if(h12===0) h12=12;
-  document.getElementById('clockH').textContent = h12+':'+two(m);
-  document.getElementById('clockAP').textContent = ap;
-}
-function timeLabel(){
-  const d=new Date(); let h=d.getHours(); const m=d.getMinutes();
-  const ap = h<12 ? '오전' : '오후'; let h12 = h%12; if(h12===0) h12=12;
-  return ap+' '+h12+':'+two(m);
-}
-updateClock(); setInterval(updateClock, 15000);
-
-function addMessage(text, who, hit){
-  const row = document.createElement('div');
-  row.className = 'row ' + (who === 'me' ? 'me' : 'bot') + (hit ? ' hit' : '');
-  if(who === 'bot'){ const mini = document.createElement('div'); mini.className = 'mini'; row.appendChild(mini); }
-  const b = document.createElement('div'); b.className = 'bubble'; b.textContent = text;
-  row.appendChild(b); scrollEl.appendChild(row); scrollEl.scrollTop = scrollEl.scrollHeight; return row;
-}
-function showTyping(){
-  const row = document.createElement('div'); row.className = 'row bot typing';
-  row.innerHTML = '<div class="mini"></div><div class="bubble"><span></span><span></span><span></span></div>';
-  scrollEl.appendChild(row); scrollEl.scrollTop = scrollEl.scrollHeight; return row;
-}
-
-let entryEl = null;
-function showEntry(){
-  const dl = document.createElement('div'); dl.className='dateline';
-  dl.innerHTML = '<span>'+timeLabel()+'</span>';
-  scrollEl.appendChild(dl);
-  entryEl = document.createElement('div');
-  const hint = document.createElement('div'); hint.className='hint-line';
-  hint.textContent = '고민 하나 골라서 보내거나, 직접 써도 돼.';
-  const chips = document.createElement('div'); chips.className='chips';
-  ['읽씹 당했어 😭','자꾸 연락하게 돼','이 사람 날 좋아하나?','헤어질까 말까'].forEach(t=>{
-    const c = document.createElement('button'); c.className='chip'; c.textContent=t;
-    c.onclick = ()=>{ inputEl.value = t.replace(/[😭]/g,'').trim(); send(); };
-    chips.appendChild(c);
-  });
-  entryEl.appendChild(hint); entryEl.appendChild(chips);
-  scrollEl.appendChild(entryEl);
-}
-
-async function askClaude(){
-  const res = await fetch("/api/chat", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ messages: history }) });
-  if(!res.ok) throw new Error("status "+res.status);
-  const data = await res.json();
-  return data.content.map(c => c.type === "text" ? c.text : "").join("").trim();
-}
-
-let busy = false;
-async function send(){
-  const text = inputEl.value.trim();
-  if(!text || busy) return;
-  if(entryEl){ entryEl.remove(); entryEl = null; }
-  busy = true; sendEl.disabled = true;
-  addMessage(text, 'me'); history.push({ role:"user", content:text });
-  inputEl.value = ''; autoGrow();
-  const typing = showTyping();
-  try{
-    const reply = await askClaude(); typing.remove();
-    addMessage(reply, 'bot', true); history.push({ role:"assistant", content:reply });
-  }catch(err){
-    typing.remove();
-    addMessage("어… 지금 머리가 안 돌아가네. 잠깐 있다 다시 말 걸어봐.", 'bot');
-    console.error(err);
-  }finally{ busy = false; sendEl.disabled = inputEl.value.trim()===''; }
-}
-
-function autoGrow(){
-  inputEl.style.height = 'auto';
-  inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px';
-  sendEl.disabled = inputEl.value.trim()==='' || busy;
-}
-inputEl.addEventListener('input', autoGrow);
-inputEl.addEventListener('keydown', e=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); send(); } });
-sendEl.addEventListener('click', send);
-
-document.getElementById('startBtn').addEventListener('click', ()=>{
-  introEl.classList.add('hide');
-  setTimeout(()=>{ showEntry(); inputEl.focus(); }, 250);
-});
+const scrollEl=document.getElementById('scroll'),inputEl=document.getElementById('input'),sendEl=document.getElementById('send'),lockEl=document.getElementById('lock'),history=[],WD=['일','월','화','수','목','금','토'];
+function two(n){return n<10?'0'+n:''+n;}
+function updateLock(){const d=new Date();let h=d.getHours();const m=d.getMinutes();let h12=h%12;if(h12===0)h12=12;document.getElementById('lockTime').textContent=h12+':'+two(m);document.getElementById('lockDate').textContent=(d.getMonth()+1)+'월 '+d.getDate()+'일 ('+WD[d.getDay()]+')';}
+function timeLabel(){const d=new Date();let h=d.getHours();const m=d.getMinutes();const ap=h<12?'오전':'오후';let h12=h%12;if(h12===0)h12=12;return ap+' '+h12+':'+two(m);}
+updateLock();setInterval(updateLock,15000);
+function addMessage(text,who){const row=document.createElement('div');row.className='row '+(who==='me'?'me':'bot');if(who==='bot'){const mini=document.createElement('div');mini.className='mini';row.appendChild(mini);}const b=document.createElement('div');b.className='bubble';b.textContent=text;row.appendChild(b);scrollEl.appendChild(row);scrollEl.scrollTop=scrollEl.scrollHeight;return row;}
+function showTyping(){const row=document.createElement('div');row.className='row bot typing';row.innerHTML='<div class="mini"></div><div class="bubble"><span></span><span></span><span></span></div>';scrollEl.appendChild(row);scrollEl.scrollTop=scrollEl.scrollHeight;return row;}
+let entryEl=null;
+function showEntry(){const dl=document.createElement('div');dl.className='dateline';dl.innerHTML='<span>'+timeLabel()+'</span>';scrollEl.appendChild(dl);entryEl=document.createElement('div');const hint=document.createElement('div');hint.className='hint-line';hint.textContent='고민 하나 골라서 보내거나, 직접 써도 돼.';const chips=document.createElement('div');chips.className='chips';['읽씹 당했어','자꾸 연락하게 돼','이 사람 날 좋아하나?','헤어질까 말까'].forEach(t=>{const c=document.createElement('button');c.className='chip';c.textContent=t;c.onclick=()=>{inputEl.value=t;send();};chips.appendChild(c);});entryEl.appendChild(hint);entryEl.appendChild(chips);scrollEl.appendChild(entryEl);}
+async function askClaude(){const res=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:history})});if(!res.ok)throw new Error("status "+res.status);const data=await res.json();return data.content.map(c=>c.type==="text"?c.text:"").join("").trim();}
+let busy=false;
+async function send(){const text=inputEl.value.trim();if(!text||busy)return;if(entryEl){entryEl.remove();entryEl=null;}busy=true;sendEl.disabled=true;addMessage(text,'me');history.push({role:"user",content:text});inputEl.value='';autoGrow();const typing=showTyping();try{const reply=await askClaude();typing.remove();addMessage(reply,'bot');history.push({role:"assistant",content:reply});}catch(err){typing.remove();addMessage("어 잠깐만.. 나 지금 연결이 안 되네. 좀 있다 다시 말 걸어봐.",'bot');console.error(err);}finally{busy=false;sendEl.disabled=inputEl.value.trim()==='';}}
+function autoGrow(){inputEl.style.height='auto';inputEl.style.height=Math.min(inputEl.scrollHeight,120)+'px';sendEl.disabled=inputEl.value.trim()===''||busy;}
+inputEl.addEventListener('input',autoGrow);
+inputEl.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}});
+sendEl.addEventListener('click',send);
+document.getElementById('notiBtn').addEventListener('click',()=>{lockEl.classList.add('hide');setTimeout(()=>{showEntry();inputEl.focus();},300);});
 </script>
 </body>
 </html>

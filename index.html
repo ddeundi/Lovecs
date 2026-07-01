@@ -180,7 +180,7 @@ const DECK=[
   {kr:'여황제',en:'THE EMPRESS',roman:'III',sym:`<path d="M15,42 L19,22 L30,32 L41,22 L45,42 Z" fill="#E6C878"/><rect x="15" y="42" width="30" height="5" fill="#E6C878"/>`},
   {kr:'힘',en:'STRENGTH',roman:'VIII',sym:`<path d="M20,29 a6.5,6.5 0 1 1 10,0 a6.5,6.5 0 1 0 10,0 a6.5,6.5 0 1 1 -10,0 a6.5,6.5 0 1 0 -10,0 Z" fill="none" stroke="#E6C878" stroke-width="2.5"/>`}
 ];
-let tarotDrawn=null, tarotFlips=0;
+let tarotDrawn=null;
 function showTarotButton(){
   const wrap=document.createElement('div');wrap.className='tbtnwrap';
   const btn=document.createElement('button');btn.className='tbtn';btn.textContent='🔮 타로 보기';
@@ -189,7 +189,9 @@ function showTarotButton(){
 }
 function openTarotPicker(){
   const idx=DECK.map((_,i)=>i);tarotDrawn=[];
-    for(let i=0;i<N;i++){const t=i-(N-1)/2;const x=Math.round(t*26);const r=(t*4).toFixed(1);const y=Math.round(Math.abs(t)*3);const base='translate(-50%,0) translate('+x+'px,'+y+'px) rotate('+r+'deg)';const lift='translate(-50%,0) translate('+x+'px,'+(y-32)+'px) rotate('+r+'deg)';fan+='<div class="tcd" data-b="'+base+'" data-l="'+lift+'" style="transform:'+base+'">✦</div>';}
+  for(let i=0;i<3;i++){const j=Math.floor(Math.random()*idx.length);tarotDrawn.push(DECK[idx[j]]);idx.splice(j,1);}
+  const N=11; let fan='';
+  for(let i=0;i<N;i++){const t=i-(N-1)/2;const x=Math.round(t*26);const r=(t*4).toFixed(1);const y=Math.round(Math.abs(t)*3);const base='translate(-50%,0) translate('+x+'px,'+y+'px) rotate('+r+'deg)';const lift='translate(-50%,0) translate('+x+'px,'+(y-32)+'px) rotate('+r+'deg)';fan+='<div class="tcd" data-b="'+base+'" data-l="'+lift+'" style="transform:'+base+'">✦</div>';}
   const over=document.createElement('div');over.className='tover';
   over.innerHTML='<div class="tpk"><div class="tpt">마음 가는 <b>카드 3장</b>을 골라봐</div><div class="tps">고민 떠올리면서 천천히</div><div class="tpc"><span id="tpcnt">0</span> / 3</div><div class="tfan">'+fan+'</div><button class="tpbtn" id="tpbtn" disabled>3장 골라줘</button></div>';
   document.querySelector('.device').appendChild(over);
@@ -198,7 +200,8 @@ function openTarotPicker(){
     cd.onclick=()=>{
       const p=selected.indexOf(cd);
       if(p>-1){selected.splice(p,1);cd.classList.remove('sel');cd.style.transform=cd.getAttribute('data-b');}
-            else{if(selected.length>=3)return;selected.push(cd);cd.classList.add('sel');cd.style.transform=cd.getAttribute('data-l');}
+      else{if(selected.length>=3)return;selected.push(cd);cd.classList.add('sel');cd.style.transform=cd.getAttribute('data-l');}
+      const c=selected.length;over.querySelector('#tpcnt').textContent=c;
       const btn=over.querySelector('#tpbtn');btn.disabled=c<3;btn.textContent=c<3?(3-c)+'장 더 골라':'이 3장으로 볼게';
     };
   });
